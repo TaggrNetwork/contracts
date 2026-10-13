@@ -1,0 +1,26 @@
+# Pinned for reproducible builds and Etherscan verification.
+# Do not change any of these without re-verifying the deployed source.
+[profile.default]
+src = "src"
+test = "test"
+script = "script"
+out = "out"
+cache_path = "cache"
+libs = ["lib"]
+solc_version = "0.8.37"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+bytecode_hash = "ipfs"
+remappings = ["@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"]
+
+[rpc_endpoints]
+mainnet = "${MAINNET_RPC_URL}"
+
+[lint]
+# Zero role addresses are accepted on purpose: a zero role can never act, and the
+# deploy script rejects zero roles before broadcasting. See the constructor NatSpec.
+exclude_lints = ["missing-zero-check"]
+
+[etherscan]
+mainnet = { key = "${ETHERSCAN_API_KEY}", chain = 1 }
